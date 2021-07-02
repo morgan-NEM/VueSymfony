@@ -1,9 +1,5 @@
 <template>
-    <div :class="{
-        [$style.component]:true,
-        [$style.collapsed]: collapsed,
-        'p-3': true,
-        'mb-5': true }">
+    <div :class="[this.$style.component, 'p-3', 'mb-5']">
 
         <div v-if="!collapsed">
             <h5 class="text-center">
@@ -29,7 +25,7 @@
         <div class="d-flex justify-content-end">
             <button
                 class="btn btn-secondary btn-sm"
-                @click="toggleCollapsed"
+                @click="$emit('toggle-collapsed');"
                 v-text="collapsed ? '<<' : '<< Collapse'"
             >
             </button>
@@ -40,9 +36,14 @@
 <script>
 export default {
     name: 'Sidebar',
+    props: {
+        collapsed: {
+            type: Boolean,
+            required: true,
+        },
+    },
     data() {
         return {
-            collapsed: false,
             categories: [
                 {
                     name: 'Imprimantes moisies',
@@ -55,9 +56,10 @@ export default {
             ],
         };
     },
+
     methods: {
         toggleCollapsed() {
-            this.collapsed = !this.collapsed;
+            this.$emit('toggle-collapsed');
         },
     },
 };
@@ -67,9 +69,6 @@ export default {
 @import "~styles/components/light-component";
 .component{
     @include light-component;
-    &.collapsed {
-        width: 70px;
-    }
     ul {
         li a:hover {
             background: $blue-component-link-hover;
