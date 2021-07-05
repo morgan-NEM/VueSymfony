@@ -8,9 +8,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-6 mb-2 pb-2">
-                TODO - load some products!
-            </div>
+            <product-list :products="products"/>
         </div>
         <div class="row">
             <legend-component :title="legend"/>
@@ -21,21 +19,24 @@
 <script>
 import axios from 'axios';
 import LegendComponent from '@/components/legend';
+import ProductList from '@/components/product-list';
 
 export default {
     name: 'Catalog',
     components: {
         LegendComponent,
+        ProductList,
     },
     data() {
         return {
+            products: [],
             legend: "Shipping takes 10-12 weeks, and products probably won't work",
         };
     },
-    mounted() {
-        axios.get('/api/products').then((response) => {
-            console.log(response);
-        });
+    async mounted() {
+        const response = await axios.get('/api/products');
+        this.products = response.data["hydra:member"];
     },
+
 };
 </script>
