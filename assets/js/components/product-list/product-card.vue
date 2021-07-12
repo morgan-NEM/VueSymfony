@@ -44,7 +44,7 @@ export default {
          * @returns {string}
          */
         price() {
-            return ((this.product.price / 100) * 0.84).toLocaleString('fr', { minimumFractionDigits: 2 });
+            return (this.product.price * 0.0084).toLocaleString('fr', { minimumFractionDigits: 2 });
         },
     },
 };

@@ -1,12 +1,19 @@
 <template>
     <div class="row">
-        <product-card v-for="product in products" :key="product['@id']"
+        <div class="col-12">
+            <div class="mt-4">
+                <loading v-show="products.length === 0"/>
+            </div>
+        </div>
+        <product-card v-for="product in products"
+                      v-show="products.length > 0" :key="product['@id']"
                       :product="product"
         />
     </div>
 </template>
 <script>
 import ProductCard from '@/components/product-list/product-card';
+import Loading from '@/components/loading';
 
 export default {
     name: 'ProductList',
@@ -17,6 +24,7 @@ export default {
         },
     },
     components: {
+        Loading,
         ProductCard,
     },
 };
