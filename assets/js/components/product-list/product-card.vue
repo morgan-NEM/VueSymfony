@@ -40,7 +40,7 @@ export default {
     },
     computed: {
         /**
-         * Retourne
+         * Retourne le prix formatté français en euros
          * @returns {string}
          */
         price() {

@@ -16,14 +16,14 @@
 
 
 <script>
-import Catalog from '@/components/catalog';
 import Sidebar from '@/components/sidebar';
+import Catalog from '@/components/catalog';
 
 export default {
     name: 'Products',
     components: {
-        Catalog,
         Sidebar,
+        Catalog,
     },
     data() {
         return {
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         toggleSidebarCollapsed() {
-            return this.sidebarCollapsed = !this.sidebarCollapsed;
+            this.sidebarCollapsed = !this.sidebarCollapsed;
         },
     },
 };

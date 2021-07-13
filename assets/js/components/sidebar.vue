@@ -9,13 +9,19 @@
             <ul class="nav flex-column mb4">
                 <li class="nav-item">
                     <a
-                        class="nav-link"
+                        :class="{
+                            'nav-link': true,
+                            'selected': currentCategoryId === null,
+                        }"
                         href="/"
                     >All Products</a>
                 </li>
                 <li v-for="category in categories" :key="category['@id']" class="nav-item">
                     <a
-                        class="nav-link"
+                        :class="{
+                            'nav-link': true,
+                            'selected': category['@id'] === currentCategoryId,
+                        }"
                         :href="`/category/${category.id}`"
                     >{{category.name}}</a>
                 </li>
@@ -35,6 +41,7 @@
 
 <script>
 import axios from 'axios';
+import { getCurrentCategoryId } from '@/services/page-context';
 
 export default {
     name: 'Sidebar',
@@ -51,7 +58,7 @@ export default {
     },
     computed: {
         currentCategoryId() {
-            return window.currentCategoryId;
+            return getCurrentCategoryId();
         },
     },
     async created() {
@@ -75,7 +82,9 @@ export default {
         li a:hover {
             background: $blue-component-link-hover;
         }
+        :global li a.selected {
+            background: $light-component-border;
+        }
     }
 }
-
 </style>
