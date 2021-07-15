@@ -2,11 +2,18 @@
     <div class="row">
         <div class="col-12">
             <div class="mt-4">
-                <loading v-show="products.length === 0"/>
+                <loading v-show="loading" />
+                <h5
+                    v-show="!loading && products.length === 0"
+                    class="ml-4"
+                >
+                    Ya rien !
+                </h5>
             </div>
         </div>
         <product-card v-for="product in products"
-                      v-show="products.length > 0" :key="product['@id']"
+                      v-show="!loading"
+                      :key="product['@id']"
                       :product="product"
         />
     </div>
@@ -20,6 +27,10 @@ export default {
     props: {
         products: {
             type: Array,
+            required: true,
+        },
+        loading: {
+            type: Boolean,
             required: true,
         },
     },
